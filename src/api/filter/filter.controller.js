@@ -21,23 +21,22 @@ function showAllProducts(req, res) {
 }
 
 function showProductByCategory(req, res) {
-  const { category,min,max } = req.body;
-  const showProductByCategoryQuery = ['SELECT name, url_image, price, discount FROM product WHERE category = ? LIMIT ?,?','SELECT count(*) as quantity from product where category = ?'];
+  const { category } = req.body;
+  const showProductByCategoryQuery = 'SELECT name, url_image, price, discount FROM product WHERE category = ?';
 
   query({
-    query: showProductByCategoryQuery.join(';'),
+    query: showProductByCategoryQuery,
     callback: (err, result) => {
       if (err) {
         res.status(500).json({ message: "Error en la base de datos" });
       } else {
         res.status(200).json({
           message: "petición exitosa",
-          data: result[0],
-          quantity:result[1]
+          data: result,
         });
       }
     },
-    arrayData: [category,min,max,category]
+    arrayData: [category, category]
   }
   );
 }
@@ -64,6 +63,8 @@ function searchProductBy(req, res) {
   );
 
 }
+
+
 
 
 

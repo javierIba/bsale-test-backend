@@ -3,7 +3,7 @@ var router = express.Router();
 const {
     showAllProducts,
     showProductByCategory,
-    searchProductBy,
+    searchProductBy
     
 } = require('./filter.controller');
 
